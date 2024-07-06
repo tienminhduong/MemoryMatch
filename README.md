@@ -8,3 +8,7 @@
 3. Bùi Bách Nguyên
 4. Trần Thị Yến Nhi 
 5. Mai Thanh Bách
+## Tính năng
+- Lật thẻ
+- Tìm cặp thẻ
+- Chọn độ khó màn chơi
