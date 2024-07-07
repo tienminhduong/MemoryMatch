@@ -18,19 +18,22 @@ public class GameBoardManager : MonoBehaviour
         cards = new List<GameObject>();
         cardValues = new List<int>();
 
-        int oldValue = 0;
-        int value = 0;
+        //int oldValue = 0;
+        //int value = 0;
         for (int i = 0; i < rows * cols / 2; i++)
         {
-            // choose a random value for the card
-            do
-            {
-                value = Random.Range(0, totalCardValues);
-            } while (oldValue == value);
+            //// choose a random value for the card
+            //do
+            //{
+            //    value = Random.Range(0, totalCardValues);
+            //} while (oldValue == value);
 
-            oldValue = value;
-            cardValues.Add(value);
-            cardValues.Add(value);
+            //oldValue = value;
+            //cardValues.Add(value);
+            //cardValues.Add(value);
+            cardValues.Add(i % totalCardValues);
+            cardValues.Add(i % totalCardValues);
+
         }
 
         Shuffle(cardValues);
