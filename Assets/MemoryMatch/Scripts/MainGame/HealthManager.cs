@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Manages the health, shield, and poison stacks of players
 public class HealthManager : MonoBehaviour
 {
     public static HealthManager instance;
@@ -16,6 +17,7 @@ public class HealthManager : MonoBehaviour
 
     private void Awake()
     {
+        // Singleton pattern to ensure only one instance of HealthManager exists
         if (instance == null)
         {
             instance = this;
@@ -26,6 +28,7 @@ public class HealthManager : MonoBehaviour
         }
     }
 
+    // Modify player's health, positive amount heals, negative amount deals damage
     public void ModifyHealth(int player, int amount)
     {
         if (amount >= 0)
@@ -52,6 +55,7 @@ public class HealthManager : MonoBehaviour
         }
     }
 
+    // Absorb damage using shield first, then health
     private void AbsorbDamage(ref int health, ref int shield, int damage)
     {
         int remainingDamage = Mathf.Abs(damage);
@@ -69,6 +73,7 @@ public class HealthManager : MonoBehaviour
         }
     }
 
+    // Modify player's shield, ensuring it does not exceed max shield
     public void ModifyShield(int player, int amount)
     {
         if (player == 1)
@@ -81,6 +86,7 @@ public class HealthManager : MonoBehaviour
         }
     }
 
+    // Apply poison damage to a player
     public void ApplyPoisonDamage(int player)
     {
         if (player == 1 && player1PoisonStacks > 0)
@@ -95,6 +101,7 @@ public class HealthManager : MonoBehaviour
         }
     }
 
+    // Add poison stacks to a player
     public void AddPoisonStacks(int player, int stacks)
     {
         if (player == 1)
@@ -107,6 +114,7 @@ public class HealthManager : MonoBehaviour
         }
     }
 
+    // Remove all poison stacks from a player
     public void RemovePoisonStacks(int player)
     {
         if (player == 1)

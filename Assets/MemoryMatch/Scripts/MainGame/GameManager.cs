@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+// Manages the game state, specifically checking for card matches
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        // Singleton pattern to ensure only one instance of GameManager exists
         if (instance == null)
         {
             instance = this;
@@ -20,6 +22,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Called when a card is revealed
     public void CardRevealed(Card card)
     {
         if (firstRevealed == null)
@@ -33,33 +36,29 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Coroutine to check if two revealed cards match
     private IEnumerator CheckMatch()
     {
         isCheckingMatch = true;
 
+        // If cards match
         if (firstRevealed.cardValue == secondRevealed.cardValue)
         {
-            
-
-            // Wait for a moment to show the matched cards
             yield return new WaitForSeconds(1.0f);
 
             // Add score for matching
             PlayerManager.instance.AddScore();
 
-            // Here you can add logic to remove matched cards if needed
-
-            // Cards match, apply the card type effect
+            // Apply the card type effect to the opponent
             PlayerManager.instance.ModifyHealth(firstRevealed.cardType);
-
         }
         else
         {
-            // No match, unreveal the cards after a brief pause
+            // If no match, unreveal the cards after a brief pause
             yield return new WaitForSeconds(1.0f);
             firstRevealed.Unreveal();
             secondRevealed.Unreveal();
-            
+
             // Switch to the next player
             PlayerManager.instance.SwitchPlayer();
         }

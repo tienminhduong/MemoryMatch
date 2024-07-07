@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Manages the game board, including creating and shuffling cards
 public class GameBoardManager : MonoBehaviour
 {
     public static GameBoardManager instance;
@@ -16,6 +17,7 @@ public class GameBoardManager : MonoBehaviour
 
     private void Awake()
     {
+        // Singleton pattern to ensure only one instance of GameBoardManager exists
         if (instance == null)
         {
             instance = this;
@@ -43,6 +45,7 @@ public class GameBoardManager : MonoBehaviour
 
         Vector3 startPos = transform.position;
 
+        // Instantiate cards and set their values and types
         for (int i = 0; i < rows; i++)
         {
             for (int j = 0; j < cols; j++)
@@ -56,6 +59,7 @@ public class GameBoardManager : MonoBehaviour
         }
     }
 
+    // Shuffle the card values list
     void Shuffle(List<int> list)
     {
         for (int i = 0; i < list.Count; i++)
@@ -67,15 +71,14 @@ public class GameBoardManager : MonoBehaviour
         }
     }
 
+    // Shuffle the board by resetting all cards and assigning new values
     public void ShuffleBoard()
     {
-        // set all cards to face down
         foreach (GameObject card in cards)
         {
             card.GetComponent<Card>().Unreveal();
         }
 
-        // set new card values
         Shuffle(cardValues);
     }
 }
