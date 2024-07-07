@@ -1,9 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameBoardManager : MonoBehaviour
 {
+    public static GameBoardManager instance;
+
     public GameObject cardPrefab;
     public int rows = 4;
     public int cols = 5;
@@ -13,29 +14,31 @@ public class GameBoardManager : MonoBehaviour
     private List<int> cardValues;
     private List<GameObject> cards;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         cards = new List<GameObject>();
         cardValues = new List<int>();
 
-        //int oldValue = 0;
-        //int value = 0;
+        // Populate the card values list with pairs
         for (int i = 0; i < rows * cols / 2; i++)
         {
-            //// choose a random value for the card
-            //do
-            //{
-            //    value = Random.Range(0, totalCardValues);
-            //} while (oldValue == value);
-
-            //oldValue = value;
-            //cardValues.Add(value);
-            //cardValues.Add(value);
             cardValues.Add(i % totalCardValues);
             cardValues.Add(i % totalCardValues);
-
         }
 
+        // Shuffle the card values list
         Shuffle(cardValues);
 
         Vector3 startPos = transform.position;
@@ -45,7 +48,9 @@ public class GameBoardManager : MonoBehaviour
             for (int j = 0; j < cols; j++)
             {
                 GameObject card = Instantiate(cardPrefab, new Vector3(startPos.x + j * offsetX, startPos.y - i * offsetY, 0), Quaternion.identity);
-                card.GetComponent<Card>().SetupCard(cardValues[i * cols + j]);
+                int cardValue = cardValues[i * cols + j];
+                CardType cardType = (CardType)(cardValue % totalCardValues);
+                card.GetComponent<Card>().SetupCard(cardValue, cardType);
                 cards.Add(card);
             }
         }
@@ -60,5 +65,17 @@ public class GameBoardManager : MonoBehaviour
             list[i] = list[randomIndex];
             list[randomIndex] = temp;
         }
+    }
+
+    public void ShuffleBoard()
+    {
+        // set all cards to face down
+        foreach (GameObject card in cards)
+        {
+            card.GetComponent<Card>().Unreveal();
+        }
+
+        // set new card values
+        Shuffle(cardValues);
     }
 }

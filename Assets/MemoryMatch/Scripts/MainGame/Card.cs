@@ -8,38 +8,42 @@ public class Card : MonoBehaviour
     public Sprite cardBack;
     public Sprite[] cardFronts;
     public SpriteRenderer spriteRenderer;
+    public CardType cardType;
 
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
-    public void SetupCard(int value)
+    public void SetupCard(int value, CardType type)
     {
         cardValue = value;
-        // set card visual to card back
+        cardType = type;
         spriteRenderer.sprite = cardBack;
     }
 
     private void OnMouseDown()
     {
-        // if the card is already revealed, do nothing
-        if (spriteRenderer.sprite == cardFronts[cardValue] || GameManager.instance.isCheckingMatch) // Add the check for isCheckingMatch
+        if (spriteRenderer.sprite == cardFronts[cardValue] || GameManager.instance.isCheckingMatch)
         {
             return;
         }
 
-        // reveal the card
-        // set card visual to card front
         spriteRenderer.sprite = cardFronts[cardValue];
-
-        // notify the GameManager that this card is revealed
         GameManager.instance.CardRevealed(this);
     }
 
     public void Unreveal()
     {
-        // set card visual to card back
         spriteRenderer.sprite = cardBack;
     }
+}
+
+public enum CardType
+{
+    Attack = 0,
+    Shield = 1,
+    Heal = 2,
+    Poison = 3,
+    Shuffle = 4
 }

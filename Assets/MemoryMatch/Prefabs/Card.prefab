@@ -178,9 +178,10 @@ MonoBehaviour:
   cardValue: 0
   cardBack: {fileID: 21300000, guid: 7dae58eaeac42bc4ba25e6315ace0c06, type: 3}
   cardFronts:
-  - {fileID: 21300000, guid: 9f7dbc0405f6f4c4592133af37163181, type: 3}
-  - {fileID: 21300000, guid: 50903b5eb3481b04b852302d2b382edd, type: 3}
-  - {fileID: 21300000, guid: b5377e3cbbca1604586f85f96796a4d2, type: 3}
   - {fileID: 21300000, guid: 9529e897179e42942a8713f8c1c6fa4d, type: 3}
+  - {fileID: 21300000, guid: 9f7dbc0405f6f4c4592133af37163181, type: 3}
+  - {fileID: 21300000, guid: b5377e3cbbca1604586f85f96796a4d2, type: 3}
+  - {fileID: 21300000, guid: 50903b5eb3481b04b852302d2b382edd, type: 3}
   - {fileID: 21300000, guid: ca3e4ecd9e22f2f4baf7f46f86d9fa3b, type: 3}
   spriteRenderer: {fileID: 0}
+  cardType: 0

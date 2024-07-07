@@ -1,28 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public bool isCheckingMatch = false;
     private Card firstRevealed;
     private Card secondRevealed;
-    public bool isCheckingMatch = false; // Add this line
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void CardRevealed(Card card)
     {
-        if (isCheckingMatch) return; // Add this line
-
         if (firstRevealed == null)
         {
             firstRevealed = card;
         }
-        else if (secondRevealed == null)
+        else
         {
             secondRevealed = card;
             StartCoroutine(CheckMatch());
@@ -31,21 +35,38 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator CheckMatch()
     {
-        isCheckingMatch = true; // Add this line
+        isCheckingMatch = true;
 
         if (firstRevealed.cardValue == secondRevealed.cardValue)
         {
-            Debug.Log("Match!");
+            
+
+            // Wait for a moment to show the matched cards
+            yield return new WaitForSeconds(1.0f);
+
+            // Add score for matching
+            PlayerManager.instance.AddScore();
+
+            // Here you can add logic to remove matched cards if needed
+
+            // Cards match, apply the card type effect
+            PlayerManager.instance.ModifyHealth(firstRevealed.cardType);
+
         }
         else
         {
-            yield return new WaitForSeconds(1f);
+            // No match, unreveal the cards after a brief pause
+            yield return new WaitForSeconds(1.0f);
             firstRevealed.Unreveal();
             secondRevealed.Unreveal();
+            
+            // Switch to the next player
+            PlayerManager.instance.SwitchPlayer();
         }
 
+        // Reset for next turn
         firstRevealed = null;
         secondRevealed = null;
-        isCheckingMatch = false; // Add this line
+        isCheckingMatch = false;
     }
 }
