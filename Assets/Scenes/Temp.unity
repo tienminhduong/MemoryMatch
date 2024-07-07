@@ -236,8 +236,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 6117253140700468096, guid: 17f849bed19b83b4697d1dd42c2fd723, type: 3}
-  rows: 4
-  cols: 5
+  rows: 3
+  cols: 4
   offsetX: 2
   offsetY: 3
   totalCardValues: 5
