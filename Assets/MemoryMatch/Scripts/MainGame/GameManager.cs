@@ -13,7 +13,9 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
 
+    // Return the camera's height
     static public float ScreenHeight => 2f * Camera.main.orthographicSize;
+    // Return the camera's width
     static public float ScreenWidth => ScreenHeight * Camera.main.aspect;
 
     public bool isCheckingMatch = false;
@@ -39,20 +41,22 @@ public class GameManager : MonoBehaviour
 
         // If cards match
         if (firstRevealed.CardValue == secondRevealed.CardValue) {
+            firstRevealed.PlayMatchedAnimation();
+            secondRevealed.PlayMatchedAnimation();
             yield return new WaitForSeconds(1.0f);
 
             // Apply the card type effect
             firstRevealed.ActivateEffect();
         }
+        // If no match, unreveal the cards after a brief pause
         else {
-            // If no match, unreveal the cards after a brief pause
             yield return new WaitForSeconds(1.0f);
+
             firstRevealed.FlipBack();
             secondRevealed.FlipBack();
-
-            // Switch to the next player
-            //PlayerManager.instance.SwitchPlayer();
         }
+        // The turn ends after checking match
+        PlayerManager.Instance.EndTurn();
 
         // Reset for next turn
         firstRevealed = null;

@@ -40,25 +40,40 @@ public class Card : MonoBehaviour
     public void FlipFront() {
         animator.SetTrigger("reveal");
     }
+    public void PlayMatchedAnimation() {
+        animator.SetTrigger("matched");
+    }
 
-    // Unreveal the card
-    public void Unreveal()
-    {
+    // Animation trigger, don't use this
+    public void Unreveal() {
         cardBack.SetActive(true);
     }
 
+    // Animation trigger, don't use this
     public void Reveal() {
         cardBack.SetActive(false);
     }
 
     public void ActivateEffect() {
-        Debug.Log("Activate " + configs.Stat[cardValue].Category.ToString() + " effect!");
+        Debug.Log("Activate " + Stat.Category.ToString() + " effect!");
+
+        CardCategory resolveCategory = Stat.Category;
+        int damage = Stat.Damage;
+
+        if (resolveCategory == CardCategory.Random) {
+            resolveCategory = (CardCategory)Random.Range(0, 7);
+
+            if (resolveCategory == CardCategory.Attack) damage = 50;
+            else if (resolveCategory == CardCategory.Heal) damage = -50;
+
+            Debug.Log("Random rolls into " + resolveCategory.ToString());
+        }
 
         // Inflict damage or heal
         Player target = PlayerManager.Instance.GetPlayer((int)Stat.Target);
-        target.ModifyHP(Stat.Damage);
+        target.ModifyHP(damage);
 
-        switch (Stat.Category) {
+        switch (resolveCategory) {
             case CardCategory.Bomb:
                 if (Random.Range(0, 100) < 50)
                     target.SetStatusEffect(StatusEffect.Burned);
@@ -71,6 +86,11 @@ public class Card : MonoBehaviour
                 break;
             case CardCategory.Lens:
                 GameBoardManager.Instance.RevealAllCardsInSeconds(2);
+                break;
+            case CardCategory.Potion:
+                target.SetStatusEffect(StatusEffect.None);
+                break;
+            default:
                 break;
         }
     }

@@ -95,6 +95,7 @@ public class GameBoardManager : MonoBehaviour
     float revealCount = 0;
     bool[] isFlipped;
 
+    // Reveal all cards in x seconds
     public void RevealAllCardsInSeconds(float second) {
         revealCount = second;
         isFlipped = new bool[cards.Count];
@@ -106,6 +107,7 @@ public class GameBoardManager : MonoBehaviour
         }
     }
 
+    // Flip all revealed cards back, except those had already been revealed before
     void FlipBackRevealed() {
         if (isFlipped == null)
             return;

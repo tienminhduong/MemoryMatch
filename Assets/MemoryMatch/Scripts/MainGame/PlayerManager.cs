@@ -18,6 +18,7 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] Player[] players = new Player[2];
     int turnPlayerIndex;
+    public int CurrentTurnPlayerIndex => turnPlayerIndex;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,5 +34,17 @@ public class PlayerManager : MonoBehaviour
     // 0 return current turn player, 1 return non-turn player
     public Player GetPlayer(int index) {
         return players[(turnPlayerIndex + index) % 2];
+    }
+    public void EndTurn() {
+        GetPlayer(turnPlayerIndex).UpdateEndTurn();
+
+        // Switch turn player
+        turnPlayerIndex = (turnPlayerIndex + 1) % 2;
+
+        // Player paralyzed, skip turn
+        if (GetPlayer(turnPlayerIndex).AppliedEffect == StatusEffect.Paralyzed) {
+            GetPlayer(turnPlayerIndex).UpdateEndTurn();
+            turnPlayerIndex = (turnPlayerIndex + 1) % 2;
+        }
     }
 }

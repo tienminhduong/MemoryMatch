@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] int index;
     [SerializeField] int maxHP;
     [SerializeField] int currentHP;
+    [SerializeField] SpriteRenderer spriteRenderer;
 
-    StatusEffect appliedEffect;
+    [SerializeField] StatusEffect appliedEffect;
     int numberTurnsEffectRemain;
 
     public StatusEffect AppliedEffect => appliedEffect;
@@ -25,7 +27,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        spriteRenderer.enabled = PlayerManager.Instance.CurrentTurnPlayerIndex == index;
     }
 
     public void UpdateEndTurn() {
@@ -43,9 +45,9 @@ public class Player : MonoBehaviour
 
     public void SetStatusEffect(StatusEffect effect) {
         appliedEffect = effect;
-        if (effect == StatusEffect.Poisoned) numberTurnsEffectRemain = 4;
-        else if (effect == StatusEffect.Burned) numberTurnsEffectRemain = 2;
-        else if (effect == StatusEffect.Paralyzed) numberTurnsEffectRemain = 1;
+        if (effect == StatusEffect.Poisoned) numberTurnsEffectRemain = 5;
+        else if (effect == StatusEffect.Burned) numberTurnsEffectRemain = 3;
+        else if (effect == StatusEffect.Paralyzed) numberTurnsEffectRemain = 2;
         else numberTurnsEffectRemain = 0;
     }
 
