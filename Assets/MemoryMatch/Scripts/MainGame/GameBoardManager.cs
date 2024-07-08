@@ -30,9 +30,9 @@ public class GameBoardManager : MonoBehaviour
     float offsetY;
     Vector3 topLeftCornerPos;
 
-    public int numberCardCategory => cardConfigs.Stat.Count;
-    //private List<int> cardValues;
     private List<Card> cards;
+    public int NumberCardCategory => cardConfigs.Stat.Count;
+    public bool IsDelayed => GameManager.instance.isCheckingMatch || revealCount > 0;
 
 
     void Start()
@@ -50,14 +50,23 @@ public class GameBoardManager : MonoBehaviour
         Shuffle();
     }
 
+    void Update() {
+        if (revealCount > 0) {
+            revealCount -= Time.deltaTime;
+            if (revealCount <= 0) {
+                FlipBackRevealed();
+            }
+        }
+    }
+
     void GenerateBoard() {
         // Cards with id from 0 to 8 can only be chosen once
         bool[] checkExisted = new bool[9];
         for (int i = 0; i < rows * cols / 2; ++i) {
 
-            int idValue = Random.Range(0, numberCardCategory);
+            int idValue = Random.Range(0, NumberCardCategory);
             while (idValue < 9 && checkExisted[idValue])
-                idValue = Random.Range(0, numberCardCategory);
+                idValue = Random.Range(0, NumberCardCategory);
 
             if (idValue < 9) checkExisted[idValue] = true;
 
@@ -83,14 +92,26 @@ public class GameBoardManager : MonoBehaviour
             }
     }
 
-    // Shuffle the board by resetting all cards and assigning new values
-    public void ShuffleBoard()
-    {
-        foreach (Card card in cards)
-        {
-            card.Unreveal();
-        }
+    float revealCount = 0;
+    bool[] isFlipped;
 
-        //Shuffle(cardValues);
+    public void RevealAllCardsInSeconds(float second) {
+        revealCount = second;
+        isFlipped = new bool[cards.Count];
+        for (int i = 0; i < cards.Count; ++i) {
+            if (cards[i].IsRevealing)
+                isFlipped[i] = true;
+            else
+                cards[i].FlipFront();
+        }
+    }
+
+    void FlipBackRevealed() {
+        if (isFlipped == null)
+            return;
+        for (int i = 0; i < cards.Count; ++i)
+            if (!isFlipped[i])
+                cards[i].FlipBack();
+        isFlipped = null;
     }
 }

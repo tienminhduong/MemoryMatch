@@ -15,17 +15,12 @@ public class HealthManager : MonoBehaviour
     public int maxHealth = 10;
     public int maxShield = 5;
 
-    private void Awake()
-    {
+    private void Awake() {
         // Singleton pattern to ensure only one instance of HealthManager exists
         if (instance == null)
-        {
             instance = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
     }
 
     // Modify player's health, positive amount heals, negative amount deals damage

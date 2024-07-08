@@ -1,0 +1,37 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerManager : MonoBehaviour
+{
+    #region Singleton
+    static PlayerManager instance;
+    public static PlayerManager Instance => instance;
+    private void Awake() {
+        // Singleton pattern to ensure only one instance of GameManager exists
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
+    #endregion
+
+    [SerializeField] Player[] players = new Player[2];
+    int turnPlayerIndex;
+    // Start is called before the first frame update
+    void Start()
+    {
+        turnPlayerIndex = 0;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    // 0 return current turn player, 1 return non-turn player
+    public Player GetPlayer(int index) {
+        return players[(turnPlayerIndex + index) % 2];
+    }
+}

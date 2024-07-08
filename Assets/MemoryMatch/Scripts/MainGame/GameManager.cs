@@ -5,17 +5,12 @@ using System.Collections;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    private void Awake()
-    {
+    private void Awake() {
         // Singleton pattern to ensure only one instance of GameManager exists
         if (instance == null)
-        {
             instance = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
     }
 
     static public float ScreenHeight => 2f * Camera.main.orthographicSize;
@@ -30,11 +25,8 @@ public class GameManager : MonoBehaviour
     public void CardRevealed(Card card)
     {
         if (firstRevealed == null)
-        {
             firstRevealed = card;
-        }
-        else
-        {
+        else {
             secondRevealed = card;
             StartCoroutine(CheckMatch());
         }
@@ -49,17 +41,14 @@ public class GameManager : MonoBehaviour
         if (firstRevealed.CardValue == secondRevealed.CardValue) {
             yield return new WaitForSeconds(1.0f);
 
-            // Add score for matching
-            //PlayerManager.instance.AddScore();
-
-            // Apply the card type effect to the opponent
-            //PlayerManager.instance.ModifyHealth(firstRevealed.cardType);
+            // Apply the card type effect
+            firstRevealed.ActivateEffect();
         }
         else {
             // If no match, unreveal the cards after a brief pause
             yield return new WaitForSeconds(1.0f);
-            firstRevealed.Unreveal();
-            secondRevealed.Unreveal();
+            firstRevealed.FlipBack();
+            secondRevealed.FlipBack();
 
             // Switch to the next player
             //PlayerManager.instance.SwitchPlayer();

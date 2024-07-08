@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     int numberTurnsEffectRemain;
 
     public StatusEffect AppliedEffect => appliedEffect;
+    public int CurrentHP => currentHP;
+    public int MaxHP => maxHP;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +47,11 @@ public class Player : MonoBehaviour
         else if (effect == StatusEffect.Burned) numberTurnsEffectRemain = 2;
         else if (effect == StatusEffect.Paralyzed) numberTurnsEffectRemain = 1;
         else numberTurnsEffectRemain = 0;
+    }
+
+    public void ModifyHP(int amount) {
+        currentHP -= amount;
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
     }
 }
 

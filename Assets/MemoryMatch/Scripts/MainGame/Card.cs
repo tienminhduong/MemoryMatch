@@ -9,33 +9,36 @@ public class Card : MonoBehaviour
     [SerializeField] GameObject cardBack;
     [SerializeField] CardConfigs configs;
     [SerializeField] SpriteRenderer iconRenderer;
+    [SerializeField] Animator animator;
 
     public int CardValue => cardValue;
+    public bool IsRevealing => !cardBack.activeSelf;
 
-    private void Awake()
-    {
-        //spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-    }
+    CardConfig Stat => configs.Stat[cardValue];
 
-    // Set up the card with a value and type
+    // Set up the card with id/cardValue
     public void SetupCard(int id)
     {
-        //cardValue = value;
-        //cardType = type;
-        //spriteRenderer.sprite = cardBack;
         cardValue = id;
-        iconRenderer.sprite = configs.Stat[id].Icon;
+        iconRenderer.sprite = Stat.Icon;
         cardBack.SetActive(true);
     }
 
     private void OnMouseDown()
     {
-        if (!cardBack.activeSelf || GameManager.instance.isCheckingMatch)
+        if (!cardBack.activeSelf || GameBoardManager.Instance.IsDelayed)
             return;
 
         // Reveal the card
-        cardBack.SetActive(false);
+        FlipFront();
         GameManager.instance.CardRevealed(this);
+    }
+
+    public void FlipBack() {
+        animator.SetTrigger("unreveal");
+    }
+    public void FlipFront() {
+        animator.SetTrigger("reveal");
     }
 
     // Unreveal the card
@@ -44,8 +47,32 @@ public class Card : MonoBehaviour
         cardBack.SetActive(true);
     }
 
-    public void ActivateEffect() {
+    public void Reveal() {
+        cardBack.SetActive(false);
+    }
 
+    public void ActivateEffect() {
+        Debug.Log("Activate " + configs.Stat[cardValue].Category.ToString() + " effect!");
+
+        // Inflict damage or heal
+        Player target = PlayerManager.Instance.GetPlayer((int)Stat.Target);
+        target.ModifyHP(Stat.Damage);
+
+        switch (Stat.Category) {
+            case CardCategory.Bomb:
+                if (Random.Range(0, 100) < 50)
+                    target.SetStatusEffect(StatusEffect.Burned);
+                break;
+            case CardCategory.Paralyze:
+                target.SetStatusEffect(StatusEffect.Paralyzed);
+                break;
+            case CardCategory.Poison:
+                target.SetStatusEffect(StatusEffect.Poisoned);
+                break;
+            case CardCategory.Lens:
+                GameBoardManager.Instance.RevealAllCardsInSeconds(2);
+                break;
+        }
     }
 }
 
