@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8ec3d824f86cbb4fb7494885f4b6af4, type: 3}
+  m_Name: CardConfigs
+  m_EditorClassIdentifier: 
+  configs:
+  - id: 0
+    category: 0
+    damage: -50
+    icon: {fileID: 1596636647, guid: a5e645d0b2507ac42807ef8e886f7d45, type: 3}
+    target: 0
+  - id: 1
+    category: 1
+    damage: 50
+    icon: {fileID: -432762466, guid: a5e645d0b2507ac42807ef8e886f7d45, type: 3}
+    target: 1
+  - id: 2
+    category: 1
+    damage: 25
+    icon: {fileID: -1915569301, guid: a5e645d0b2507ac42807ef8e886f7d45, type: 3}
+    target: 1
+  - id: 3
+    category: 2
+    damage: 25
+    icon: {fileID: 23211426, guid: a5e645d0b2507ac42807ef8e886f7d45, type: 3}
+    target: 1
+  - id: 4
+    category: 3
+    damage: 10
+    icon: {fileID: 169926648, guid: a5e645d0b2507ac42807ef8e886f7d45, type: 3}
+    target: 1
+  - id: 5
+    category: 4
+    damage: 10
+    icon: {fileID: 2057210695, guid: a5e645d0b2507ac42807ef8e886f7d45, type: 3}
+    target: 1
+  - id: 6
+    category: 5
+    damage: 0
+    icon: {fileID: -732196714, guid: a5e645d0b2507ac42807ef8e886f7d45, type: 3}
+    target: 0
+  - id: 7
+    category: 6
+    damage: -10
+    icon: {fileID: 551799492, guid: a5e645d0b2507ac42807ef8e886f7d45, type: 3}
+    target: 0
+  - id: 8
+    category: 7
+    damage: 0
+    icon: {fileID: 1781341979, guid: a5e645d0b2507ac42807ef8e886f7d45, type: 3}
+    target: 0
+  - id: 9
+    category: 1
+    damage: 0
+    icon: {fileID: -473253793, guid: a5e645d0b2507ac42807ef8e886f7d45, type: 3}
+    target: 0
+  - id: 10
+    category: 1
+    damage: 0
+    icon: {fileID: 79209494, guid: a5e645d0b2507ac42807ef8e886f7d45, type: 3}
+    target: 0
+  - id: 11
+    category: 1
+    damage: 0
+    icon: {fileID: -963367924, guid: a5e645d0b2507ac42807ef8e886f7d45, type: 3}
+    target: 0
+  - id: 12
+    category: 1
+    damage: 0
+    icon: {fileID: 507577078, guid: a5e645d0b2507ac42807ef8e886f7d45, type: 3}
+    target: 0

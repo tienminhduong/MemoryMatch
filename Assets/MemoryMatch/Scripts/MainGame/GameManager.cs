@@ -1,51 +1,66 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
+// Manages the game state, specifically checking for card matches
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    private Card firstRevealed;
-    private Card secondRevealed;
-    public bool isCheckingMatch = false; // Add this line
-
-    private void Awake()
-    {
-        instance = this;
+    private void Awake() {
+        // Singleton pattern to ensure only one instance of GameManager exists
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
     }
 
+    // Return the camera's height
+    static public float ScreenHeight => 2f * Camera.main.orthographicSize;
+    // Return the camera's width
+    static public float ScreenWidth => ScreenHeight * Camera.main.aspect;
+
+    public bool isCheckingMatch = false;
+    private Card firstRevealed;
+    private Card secondRevealed;
+
+
+    // Called when a card is revealed
     public void CardRevealed(Card card)
     {
-        if (isCheckingMatch) return; // Add this line
-
         if (firstRevealed == null)
-        {
             firstRevealed = card;
-        }
-        else if (secondRevealed == null)
-        {
+        else {
             secondRevealed = card;
             StartCoroutine(CheckMatch());
         }
     }
 
+    // Coroutine to check if two revealed cards match
     private IEnumerator CheckMatch()
     {
-        isCheckingMatch = true; // Add this line
+        isCheckingMatch = true;
 
-        if (firstRevealed.cardValue == secondRevealed.cardValue)
-        {
-            Debug.Log("Match!");
-        }
-        else
-        {
-            yield return new WaitForSeconds(1f);
-            firstRevealed.Unreveal();
-            secondRevealed.Unreveal();
-        }
+        // If cards match
+        if (firstRevealed.CardValue == secondRevealed.CardValue) {
+            firstRevealed.PlayMatchedAnimation();
+            secondRevealed.PlayMatchedAnimation();
+            yield return new WaitForSeconds(1.0f);
 
+            // Apply the card type effect
+            firstRevealed.ActivateEffect();
+        }
+        // If no match, unreveal the cards after a brief pause
+        else {
+            yield return new WaitForSeconds(1.0f);
+
+            firstRevealed.FlipBack();
+            secondRevealed.FlipBack();
+        }
+        // The turn ends after checking match
+        PlayerManager.Instance.EndTurn();
+
+        // Reset for next turn
         firstRevealed = null;
         secondRevealed = null;
-        isCheckingMatch = false; // Add this line
+        isCheckingMatch = false;
     }
 }
