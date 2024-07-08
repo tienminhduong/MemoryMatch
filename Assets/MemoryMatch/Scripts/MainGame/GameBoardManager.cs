@@ -4,17 +4,9 @@ using UnityEngine;
 // Manages the game board, including creating and shuffling cards
 public class GameBoardManager : MonoBehaviour
 {
-    public static GameBoardManager instance;
-
-    public GameObject cardPrefab;
-    public int rows = 4;
-    public int cols = 5;
-    public float offsetX = 3f;
-    public float offsetY = 2f;
-    public int totalCardValues = 5;
-    private List<int> cardValues;
-    private List<GameObject> cards;
-
+    #region Singleton
+    static GameBoardManager instance;
+    public static GameBoardManager Instance => instance;
     private void Awake()
     {
         // Singleton pattern to ensure only one instance of GameBoardManager exists
@@ -27,10 +19,22 @@ public class GameBoardManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    #endregion
+
+    public Card cardPrefab;
+    public CardConfigs cardConfigs;
+    public int rows = 4;
+    public int cols = 5;
+    public float offsetX = 3f;
+    public float offsetY = 2f;
+    public int totalCardValues => cardConfigs.Stat.Count;
+    private List<int> cardValues;
+    private List<Card> cards;
+
 
     void Start()
     {
-        cards = new List<GameObject>();
+        cards = new List<Card>();
         cardValues = new List<int>();
 
         // Populate the card values list with pairs
@@ -50,10 +54,10 @@ public class GameBoardManager : MonoBehaviour
         {
             for (int j = 0; j < cols; j++)
             {
-                GameObject card = Instantiate(cardPrefab, new Vector3(startPos.x + j * offsetX, startPos.y - i * offsetY, 0), Quaternion.identity);
+                Card card = Instantiate(cardPrefab, new Vector3(startPos.x + j * offsetX, startPos.y - i * offsetY, 0), Quaternion.identity);
                 int cardValue = cardValues[i * cols + j];
-                CardType cardType = (CardType)(cardValue % totalCardValues);
-                card.GetComponent<Card>().SetupCard(cardValue, cardType);
+                CardCategory cardType = (CardCategory)(cardValue % totalCardValues);
+                card.SetupCard(cardValue);
                 cards.Add(card);
             }
         }
@@ -74,9 +78,9 @@ public class GameBoardManager : MonoBehaviour
     // Shuffle the board by resetting all cards and assigning new values
     public void ShuffleBoard()
     {
-        foreach (GameObject card in cards)
+        foreach (Card card in cards)
         {
-            card.GetComponent<Card>().Unreveal();
+            card.Unreveal();
         }
 
         Shuffle(cardValues);

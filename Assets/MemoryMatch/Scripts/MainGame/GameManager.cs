@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         isCheckingMatch = true;
 
         // If cards match
-        if (firstRevealed.cardValue == secondRevealed.cardValue)
+        //if (firstRevealed.cardValue == secondRevealed.cardValue)
         {
             yield return new WaitForSeconds(1.0f);
 
@@ -50,9 +50,9 @@ public class GameManager : MonoBehaviour
             PlayerManager.instance.AddScore();
 
             // Apply the card type effect to the opponent
-            PlayerManager.instance.ModifyHealth(firstRevealed.cardType);
+            //PlayerManager.instance.ModifyHealth(firstRevealed.cardType);
         }
-        else
+        //else
         {
             // If no match, unreveal the cards after a brief pause
             yield return new WaitForSeconds(1.0f);

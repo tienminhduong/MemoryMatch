@@ -69,52 +69,52 @@ public class PlayerManager : MonoBehaviour
     }
 
     // Modify health, shield, or poison stacks based on the card type
-    public void ModifyHealth(CardType cardType)
-    {
-        int healthChange = 0;
-        int shieldChange = 0;
-        int poisonStacks = 0;
+    //public void ModifyHealth(CardCategory cardType)
+    //{
+    //    int healthChange = 0;
+    //    int shieldChange = 0;
+    //    int poisonStacks = 0;
 
-        switch (cardType)
-        {
-            case CardType.Attack:
-                healthChange = -2;
-                break;
-            case CardType.Shield:
-                shieldChange = 1;
-                break;
-            case CardType.Heal:
-                healthChange = 2;
-                break;
-            case CardType.Poison:
-                poisonStacks = 1;
-                break;
-            case CardType.Shuffle:
-                GameBoardManager.instance.ShuffleBoard();
-                break;
-        }
+    //    switch (cardType)
+    //    {
+    //        case CardCategory.Attack:
+    //            healthChange = -2;
+    //            break;
+    //        case CardCategory.Shield:
+    //            shieldChange = 1;
+    //            break;
+    //        case CardCategory.Heal:
+    //            healthChange = 2;
+    //            break;
+    //        case CardCategory.Poison:
+    //            poisonStacks = 1;
+    //            break;
+    //        case CardCategory.Shuffle:
+    //            GameBoardManager.instance.ShuffleBoard();
+    //            break;
+    //    }
 
-        if (cardType == CardType.Poison)
-        {
-            HealthManager.instance.AddPoisonStacks(currentPlayer == 1 ? 2 : 1, poisonStacks);
-        }
-        else if (cardType == CardType.Shield)
-        {
-            HealthManager.instance.ModifyShield(currentPlayer, shieldChange);
-        }
-        else if (cardType == CardType.Heal)
-        {
-            HealthManager.instance.ModifyHealth(currentPlayer, healthChange);
-        }
-        else if (cardType == CardType.Attack)
-        {
-            HealthManager.instance.ModifyHealth(currentPlayer == 1 ? 2 : 1, healthChange);
-        }
+    //    if (cardType == CardCategory.Poison)
+    //    {
+    //        HealthManager.instance.AddPoisonStacks(currentPlayer == 1 ? 2 : 1, poisonStacks);
+    //    }
+    //    else if (cardType == CardCategory.Shield)
+    //    {
+    //        HealthManager.instance.ModifyShield(currentPlayer, shieldChange);
+    //    }
+    //    else if (cardType == CardCategory.Heal)
+    //    {
+    //        HealthManager.instance.ModifyHealth(currentPlayer, healthChange);
+    //    }
+    //    else if (cardType == CardCategory.Attack)
+    //    {
+    //        HealthManager.instance.ModifyHealth(currentPlayer == 1 ? 2 : 1, healthChange);
+    //    }
 
-        UpdateHealthText();
-        UpdateShieldText();
-        UpdatePoisonText();
-    }
+    //    UpdateHealthText();
+    //    UpdateShieldText();
+    //    UpdatePoisonText();
+    //}
 
     // Update UI elements with the current score
     private void UpdateScoreText()
