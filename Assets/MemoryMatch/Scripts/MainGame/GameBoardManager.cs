@@ -21,58 +21,66 @@ public class GameBoardManager : MonoBehaviour
     }
     #endregion
 
-    public Card cardPrefab;
+    [SerializeField] Card cardPrefab;
     public CardConfigs cardConfigs;
-    public int rows = 4;
-    public int cols = 5;
-    public float offsetX = 3f;
-    public float offsetY = 2f;
-    public int totalCardValues => cardConfigs.Stat.Count;
-    private List<int> cardValues;
+    [SerializeField] int rows = 7;
+    [SerializeField] int cols = 4;
+
+    float offsetX;
+    float offsetY;
+    Vector3 topLeftCornerPos;
+
+    public int numberCardCategory => cardConfigs.Stat.Count;
+    //private List<int> cardValues;
     private List<Card> cards;
 
 
     void Start()
     {
         cards = new List<Card>();
-        cardValues = new List<int>();
+
+        offsetX = GameManager.ScreenWidth / instance.cols;
+        offsetY = GameManager.ScreenHeight / instance.rows * 0.7f;
+        topLeftCornerPos = new Vector3(-offsetX * (cols / 2f - 0.5f), offsetY * (rows / 2f - 0.5f), 0f);
 
         // Populate the card values list with pairs
-        for (int i = 0; i < rows * cols / 2; i++)
-        {
-            cardValues.Add(i % totalCardValues);
-            cardValues.Add(i % totalCardValues);
-        }
+        GenerateBoard();
 
         // Shuffle the card values list
-        Shuffle(cardValues);
+        Shuffle();
+    }
 
-        Vector3 startPos = transform.position;
+    void GenerateBoard() {
+        // Cards with id from 0 to 8 can only be chosen once
+        bool[] checkExisted = new bool[9];
+        for (int i = 0; i < rows * cols / 2; ++i) {
 
-        // Instantiate cards and set their values and types
-        for (int i = 0; i < rows; i++)
-        {
-            for (int j = 0; j < cols; j++)
-            {
-                Card card = Instantiate(cardPrefab, new Vector3(startPos.x + j * offsetX, startPos.y - i * offsetY, 0), Quaternion.identity);
-                int cardValue = cardValues[i * cols + j];
-                CardCategory cardType = (CardCategory)(cardValue % totalCardValues);
-                card.SetupCard(cardValue);
-                cards.Add(card);
-            }
+            int idValue = Random.Range(0, numberCardCategory);
+            while (idValue < 9 && checkExisted[idValue])
+                idValue = Random.Range(0, numberCardCategory);
+
+            if (idValue < 9) checkExisted[idValue] = true;
+
+            Card card = Instantiate(cardPrefab);
+            card.SetupCard(idValue); cards.Add(card);
+            card = Instantiate(cardPrefab);
+            card.SetupCard(idValue); cards.Add(card);
         }
     }
 
     // Shuffle the card values list
-    void Shuffle(List<int> list)
-    {
-        for (int i = 0; i < list.Count; i++)
-        {
-            int temp = list[i];
-            int randomIndex = Random.Range(i, list.Count);
-            list[i] = list[randomIndex];
-            list[randomIndex] = temp;
+    public void Shuffle() {
+        List<Card> temp = cards;
+        cards = new List<Card>();
+        while (temp.Count > 0) {
+            Card c = temp[Random.Range(0, temp.Count)];
+            cards.Add(c);
+            temp.Remove(c);
         }
+        for (int i = 0; i < rows; ++i)
+            for (int j = 0; j < cols; ++j) {
+                cards[i * cols + j].transform.position = new Vector3(topLeftCornerPos.x + j * offsetX, topLeftCornerPos.y - i * offsetY, 0);
+            }
     }
 
     // Shuffle the board by resetting all cards and assigning new values
@@ -83,6 +91,6 @@ public class GameBoardManager : MonoBehaviour
             card.Unreveal();
         }
 
-        Shuffle(cardValues);
+        //Shuffle(cardValues);
     }
 }

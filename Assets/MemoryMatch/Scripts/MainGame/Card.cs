@@ -10,6 +10,8 @@ public class Card : MonoBehaviour
     [SerializeField] CardConfigs configs;
     [SerializeField] SpriteRenderer iconRenderer;
 
+    public int CardValue => cardValue;
+
     private void Awake()
     {
         //spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -40,6 +42,10 @@ public class Card : MonoBehaviour
     public void Unreveal()
     {
         cardBack.SetActive(true);
+    }
+
+    public void ActivateEffect() {
+
     }
 }
 
