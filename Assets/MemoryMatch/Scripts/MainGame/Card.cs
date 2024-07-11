@@ -60,6 +60,7 @@ public class Card : MonoBehaviour
         CardCategory resolveCategory = Stat.Category;
         int damage = Stat.Damage;
 
+        ///set target for random effect
         if (resolveCategory == CardCategory.Random) {
             resolveCategory = (CardCategory)Random.Range(0, 7);
 

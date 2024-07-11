@@ -21,7 +21,7 @@ MonoBehaviour:
   - id: 1
     category: 1
     damage: 50
-    icon: {fileID: -1318900355, guid: 85703ee0d52ea0d479ea35a4259a0b41, type: 3}
+    icon: {fileID: -432762466, guid: a5e645d0b2507ac42807ef8e886f7d45, type: 3}
     target: 1
   - id: 2
     category: 1
