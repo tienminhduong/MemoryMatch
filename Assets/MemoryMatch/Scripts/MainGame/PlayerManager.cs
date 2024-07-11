@@ -46,5 +46,6 @@ public class PlayerManager : MonoBehaviour
             GetPlayer(turnPlayerIndex).UpdateEndTurn();
             turnPlayerIndex = (turnPlayerIndex + 1) % 2;
         }
+        for (int i = 0; i < 2; i++) players[i].UpdateStatsUI();
     }
 }
