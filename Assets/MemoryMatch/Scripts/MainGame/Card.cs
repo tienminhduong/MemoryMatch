@@ -55,7 +55,7 @@ public class Card : MonoBehaviour
     }
 
     public void ActivateEffect() {
-        Debug.Log("Activate " + Stat.Category.ToString() + " effect!");
+        //Debug.Log("Activate " + Stat.Category.ToString() + " effect!");
 
         CardCategory resolveCategory = Stat.Category;
         int damage = Stat.Damage;

@@ -36,7 +36,7 @@ public class PlayerManager : MonoBehaviour
         return players[(turnPlayerIndex + index) % 2];
     }
     public void EndTurn() {
-        GetPlayer(turnPlayerIndex).UpdateEndTurn();
+        GetPlayer(0).UpdateEndTurn();
 
         // Switch turn player
         turnPlayerIndex = (turnPlayerIndex + 1) % 2;
@@ -46,6 +46,6 @@ public class PlayerManager : MonoBehaviour
             GetPlayer(turnPlayerIndex).UpdateEndTurn();
             turnPlayerIndex = (turnPlayerIndex + 1) % 2;
         }
-        for (int i = 0; i < 2; i++) players[i].UpdateStatsUI();
+        for (int i = 0; i < 2; i++) UIManager.Instance.UpdateUI(players[i]);
     }
 }

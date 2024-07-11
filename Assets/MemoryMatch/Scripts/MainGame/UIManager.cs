@@ -34,8 +34,27 @@ public class UIManager : MonoBehaviour
         //text1 += "HP: " + 
     }
 
-    public void HealthUpdate(Player player)
+    public void UpdateUI(Player player)
     {
-        player.PlayerHealthBar.value = player.CurrentHP;
+        //player.PlayerHealthBar.value = player.CurrentHP;
+        player.Status.slider.value = player.CurrentHP;
+        player.Status.text.text = player.AppliedEffect.ToString();
+
+        if(player.AppliedEffect == StatusEffect.None)
+        {
+            player.Status.color.color = Color.white;
+        }
+        else if (player.AppliedEffect == StatusEffect.Burned)
+        {
+            player.Status.color.color = Color.red;
+        }
+        else if (player.AppliedEffect == StatusEffect.Paralyzed)
+        {
+            player.Status.color.color = Color.yellow;
+        }
+        else if (player.AppliedEffect == StatusEffect.Poisoned)
+        {
+            player.Status.color.color = Color.green;
+        }
     }
 }

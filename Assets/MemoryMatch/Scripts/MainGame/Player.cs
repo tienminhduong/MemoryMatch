@@ -10,14 +10,14 @@ public class Player : MonoBehaviour
     [SerializeField] int currentHP;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Slider playerHealthBar;
-
+    [SerializeField] PlayerStatusUI status;
     [SerializeField] StatusEffect appliedEffect;
     int numberTurnsEffectRemain;
 
     public StatusEffect AppliedEffect => appliedEffect;
     public int CurrentHP => currentHP;
     public int MaxHP => maxHP;
-    public Slider PlayerHealthBar => playerHealthBar;
+    public PlayerStatusUI Status => status;
 
     // Start is called before the first frame update
     void Start()
@@ -35,12 +35,12 @@ public class Player : MonoBehaviour
 
     public void UpdateStatsUI()
     {
-        UIManager.Instance.HealthUpdate(this);
+        
     }
 
     public void UpdateEndTurn() {
         if (appliedEffect == StatusEffect.None)
-            goto ui;
+            return;
 
         if (appliedEffect == StatusEffect.Poisoned)
             ModifyHP(maxHP / 16);
@@ -49,8 +49,6 @@ public class Player : MonoBehaviour
         numberTurnsEffectRemain--;
         if (numberTurnsEffectRemain == 0)
             appliedEffect = StatusEffect.None;
-        ui:
-        UpdateStatsUI();
     }
 
     public void SetStatusEffect(StatusEffect effect) {
