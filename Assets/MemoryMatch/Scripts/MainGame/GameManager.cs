@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 // Manages the game state, specifically checking for card matches
 public class GameManager : MonoBehaviour
@@ -49,6 +50,8 @@ public class GameManager : MonoBehaviour
 
             // Apply the card type effect
             firstRevealed.ActivateEffect();
+
+            matchedCards += 2;
         }
         // If no match, unreveal the cards after a brief pause
         else {
@@ -64,5 +67,17 @@ public class GameManager : MonoBehaviour
         firstRevealed = null;
         secondRevealed = null;
         isCheckingMatch = false;
+    }
+
+    [SerializeField] int totalCards;
+    int matchedCards = 0;
+
+    private void Update()
+    {
+        // end game
+        if (matchedCards == totalCards)
+        {
+            SceneManager.LoadScene(2);
+        }
     }
 }

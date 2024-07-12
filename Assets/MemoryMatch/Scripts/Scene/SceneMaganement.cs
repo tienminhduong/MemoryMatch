@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneMaganement : MonoBehaviour
 {
+    public static SceneMaganement instance;
     [SerializeField] GameObject settingMenu;
 
     private void Start()
@@ -31,4 +32,9 @@ public class SceneMaganement : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }   
+
+    public void LoadEndScene()
+    {
+        SceneManager.LoadScene(2);
+    }
 }
