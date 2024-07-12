@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
         if (firstRevealed == null)
             firstRevealed = card;
         else {
+            if (firstRevealed == card)
+                return;
             secondRevealed = card;
             StartCoroutine(CheckMatch());
         }
