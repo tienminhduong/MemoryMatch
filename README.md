@@ -3,12 +3,15 @@
 - Chủ đề: Memory Match
 - Công nghệ: Unity/C#
 ## Danh sách thành viên
-1. Tiền Minh Dương (Leader)
-2. Đặng Minh Nhật
-3. Bùi Bách Nguyên
-4. Trần Thị Yến Nhi 
-5. Mai Thanh Bách
+|STT|MSSV|Tên|Vị trí|
+|---|---|---|---|
+|1|23520357|Tiền Minh Dương (Leader)|Game Designer, Game Developer|
+|2|23521093|Đặng Minh Nhật|Game Developer|
+|3|23521036|Bùi Bách Nguyên|Game Developer, UI Designer|
+|4|23521116|Trần Thị Yến Nhi|Game Developer|
+|5|22520090|Mai Thanh Bách|Game Designer, Game Developer|
 ## Tính năng
 - Lật thẻ
 - Tìm cặp thẻ
-- Chọn độ khó màn chơi
+- PvP giữa 2 người chơi
+- Các thẻ đặc biệt với nhiều tính năng khác nhau
