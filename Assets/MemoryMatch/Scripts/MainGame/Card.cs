@@ -55,23 +55,16 @@ public class Card : MonoBehaviour
     }
 
     public void ActivateEffect() {
-        //Debug.Log("Activate " + Stat.Category.ToString() + " effect!");
-
-        //CardCategory resolveCategory = Stat.Category;
-        //int damage = Stat.Damage;
         CardConfig resolveCard = Stat;
 
         if (resolveCard.Category == CardCategory.Random) {
             resolveCard = configs.Stat[Random.Range(0, 7)];
-            //resolveCategory = (CardCategory)Random.Range(0, 7);
-
-            //if (resolveCategory == CardCategory.Attack) damage = 50;
-            //else if (resolveCategory == CardCategory.Heal) damage = -50;
 
             Debug.Log("Random rolls into " + resolveCard.Category.ToString());
         }
 
         Player target = PlayerManager.Instance.GetPlayer((int)resolveCard.Target);
+
         // Inflict damage or heal
         target.ModifyHP(resolveCard.Damage);
 
