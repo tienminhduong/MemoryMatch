@@ -8,17 +8,15 @@ public class SceneMaganement : MonoBehaviour
 {
     public static SceneMaganement instance;
     [SerializeField] GameObject settingMenu;
+    [SerializeField] GameObject gamerulePanel;
 
     private void Start()
     {
         settingMenu.SetActive(false);
+        gamerulePanel.SetActive(false);
     }
 
 
-    public void LoadMainScene()  // PvP mode
-    {
-        SceneManager.LoadScene(1);
-    }
 
     public void OpenSettingMenu()
     {
@@ -26,8 +24,22 @@ public class SceneMaganement : MonoBehaviour
     }
 
     public void CloseSettingMenu()
-    { settingMenu.SetActive(false);}
+    { settingMenu.SetActive(false); }
 
+
+    public void OpenGamerulePanel()
+    {
+        gamerulePanel.SetActive(true);
+    }
+    public void CloseGamerulePanel()
+    {
+        gamerulePanel.SetActive(false);
+    }
+
+    public void LoadMainScene()  // PvP mode
+    {
+        SceneManager.LoadScene(1);
+    }
     public void LoadHome() // start scene
     {
         SceneManager.LoadScene(0);

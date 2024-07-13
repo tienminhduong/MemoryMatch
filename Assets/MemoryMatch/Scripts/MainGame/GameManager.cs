@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    [SerializeField] int Number_Of_Matched_Pair = 0;
     private void Awake() {
         // Singleton pattern to ensure only one instance of GameManager exists
         if (instance == null)
@@ -43,7 +44,8 @@ public class GameManager : MonoBehaviour
         isCheckingMatch = true;
 
         // If cards match
-        if (firstRevealed.CardValue == secondRevealed.CardValue) {
+        if (firstRevealed.CardValue == secondRevealed.CardValue)
+        {
             firstRevealed.PlayMatchedAnimation();
             secondRevealed.PlayMatchedAnimation();
             yield return new WaitForSeconds(1.0f);
@@ -54,7 +56,8 @@ public class GameManager : MonoBehaviour
             matchedCards += 2;
         }
         // If no match, unreveal the cards after a brief pause
-        else {
+        else
+        {
             yield return new WaitForSeconds(1.0f);
 
             firstRevealed.FlipBack();
