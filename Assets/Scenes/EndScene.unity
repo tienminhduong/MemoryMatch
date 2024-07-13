@@ -679,7 +679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingMenu: {fileID: 1390146234}
-  gamerulePanel: {fileID: 0}
+  gamerulePanel: {fileID: 2412261292521326119, guid: f2b76ba4c87662a4987c9e269d98fb2f, type: 3}
 --- !u!4 &1390146236
 Transform:
   m_ObjectHideFlags: 0
