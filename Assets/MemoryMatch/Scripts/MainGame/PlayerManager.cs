@@ -55,12 +55,6 @@ public class PlayerManager : MonoBehaviour
         if (switchPlayer)
             turnPlayerIndex = (turnPlayerIndex + 1) % 2;
 
-        // Player paralyzed, skip turn
-        if (GetPlayer(turnPlayerIndex).AppliedEffect == StatusEffect.Paralyzed) {
-            GetPlayer(turnPlayerIndex).UpdateEndTurn();
-            turnPlayerIndex = (turnPlayerIndex + 1) % 2;
-        }
-
         // Update UI
         for (int i = 0; i < 2; i++) UIManager.Instance.UpdateUI(players[i]);
     }
