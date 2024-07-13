@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 // Manages the game state, specifically checking for card matches
 public class GameManager : MonoBehaviour
@@ -54,6 +55,8 @@ public class GameManager : MonoBehaviour
             firstRevealed.ActivateEffect();
 
             matchedCards += 2;
+            //PlayerManager.Instance.EndTurn(true);
+            EndTurn(false);
         }
         // If no match, unreveal the cards after a brief pause
         else
@@ -62,14 +65,22 @@ public class GameManager : MonoBehaviour
 
             firstRevealed.FlipBack();
             secondRevealed.FlipBack();
+            //PlayerManager.Instance.EndTurn(false);
+            EndTurn(true);
         }
         // The turn ends after checking match
-        PlayerManager.Instance.EndTurn();
 
         // Reset for next turn
         firstRevealed = null;
         secondRevealed = null;
         isCheckingMatch = false;
+    }
+
+    private void EndTurn(bool switchPlayer) {
+        PlayerManager.Instance.EndTurn(switchPlayer);
+        if (PlayerManager.Instance.GetPlayer(0).AppliedEffect == StatusEffect.Paralyzed) {
+            PlayerManager.Instance.EndTurn(true);
+        }
     }
 
     [SerializeField] int totalCards;

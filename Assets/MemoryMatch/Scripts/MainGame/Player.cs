@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
         appliedEffect = effect;
         if (effect == StatusEffect.Poisoned) numberTurnsEffectRemain = 5;
         else if (effect == StatusEffect.Burned) numberTurnsEffectRemain = 3;
-        else if (effect == StatusEffect.Paralyzed) numberTurnsEffectRemain = 2;
+        else if (effect == StatusEffect.Paralyzed) numberTurnsEffectRemain = 1;
         else numberTurnsEffectRemain = 0;
     }
 
