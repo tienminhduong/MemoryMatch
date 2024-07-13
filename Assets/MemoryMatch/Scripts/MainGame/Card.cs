@@ -55,26 +55,20 @@ public class Card : MonoBehaviour
     }
 
     public void ActivateEffect() {
-        //Debug.Log("Activate " + Stat.Category.ToString() + " effect!");
+        CardConfig resolveCard = Stat;
 
-        CardCategory resolveCategory = Stat.Category;
-        int damage = Stat.Damage;
+        if (resolveCard.Category == CardCategory.Random) {
+            resolveCard = configs.Stat[Random.Range(0, 7)];
 
-        ///set target for random effect
-        if (resolveCategory == CardCategory.Random) {
-            resolveCategory = (CardCategory)Random.Range(0, 7);
-
-            if (resolveCategory == CardCategory.Attack) damage = 50;
-            else if (resolveCategory == CardCategory.Heal) damage = -50;
-
-            Debug.Log("Random rolls into " + resolveCategory.ToString());
+            Debug.Log("Random rolls into " + resolveCard.Category.ToString());
         }
 
-        // Inflict damage or heal
-        Player target = PlayerManager.Instance.GetPlayer((int)Stat.Target);
-        target.ModifyHP(damage);
+        Player target = PlayerManager.Instance.GetPlayer((int)resolveCard.Target);
 
-        switch (resolveCategory) {
+        // Inflict damage or heal
+        target.ModifyHP(resolveCard.Damage);
+
+        switch (resolveCard.Category) {
             case CardCategory.Bomb:
                 if (Random.Range(0, 100) < 50)
                     target.SetStatusEffect(StatusEffect.Burned);
@@ -96,5 +90,3 @@ public class Card : MonoBehaviour
         }
     }
 }
-
-

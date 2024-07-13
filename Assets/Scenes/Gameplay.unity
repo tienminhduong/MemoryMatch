@@ -2284,6 +2284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6388851af4d43564f8f86b6081796491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shuffleAfter: 0
   isCheckingMatch: 0
   totalCards: 28
 --- !u!4 &1126506381
@@ -3682,6 +3683,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1050
       objectReference: {fileID: 0}
+    - target: {fileID: 6040202563003042274, guid: f2b76ba4c87662a4987c9e269d98fb2f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -183.70001
+      objectReference: {fileID: 0}
     - target: {fileID: 6892068761596873192, guid: f2b76ba4c87662a4987c9e269d98fb2f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3815,8 +3820,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 951d2604e733dfb4daf370cc7a4d79a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1Text: {fileID: 0}
-  player2Text: {fileID: 0}
 --- !u!1 &2079026993
 GameObject:
   m_ObjectHideFlags: 0

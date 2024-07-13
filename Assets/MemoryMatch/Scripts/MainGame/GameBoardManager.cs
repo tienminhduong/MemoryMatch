@@ -98,6 +98,7 @@ public class GameBoardManager : MonoBehaviour
     // Reveal all cards in x seconds
     public void RevealAllCardsInSeconds(float second) {
         revealCount = second;
+        GameManager.instance.shuffleAfter = (int)second + 1;
         isFlipped = new bool[cards.Count];
         for (int i = 0; i < cards.Count; ++i) {
             if (cards[i].IsRevealing)

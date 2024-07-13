@@ -48,17 +48,20 @@ public class PlayerManager : MonoBehaviour
     public Player GetPlayer(int index) {
         return players[(turnPlayerIndex + index) % 2];
     }
-    public void EndTurn() {
+    public void EndTurn(bool switchPlayer) {
         GetPlayer(0).UpdateEndTurn();
 
         // Switch turn player
-        turnPlayerIndex = (turnPlayerIndex + 1) % 2;
+        if (switchPlayer)
+            turnPlayerIndex = (turnPlayerIndex + 1) % 2;
 
         // Player paralyzed, skip turn
         if (GetPlayer(turnPlayerIndex).AppliedEffect == StatusEffect.Paralyzed) {
             GetPlayer(turnPlayerIndex).UpdateEndTurn();
             turnPlayerIndex = (turnPlayerIndex + 1) % 2;
         }
+
+        // Update UI
         for (int i = 0; i < 2; i++) UIManager.Instance.UpdateUI(players[i]);
     }
 
