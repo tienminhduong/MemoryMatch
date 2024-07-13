@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
         }
         else if (player.AppliedEffect == StatusEffect.Burned)
         {
-            player.Status.color.color = Color.red;
+            player.Status.color.color = new Color(255, 63, 0);
         }
         else if (player.AppliedEffect == StatusEffect.Paralyzed)
         {
@@ -49,7 +49,7 @@ public class UIManager : MonoBehaviour
         }
         else if (player.AppliedEffect == StatusEffect.Poisoned)
         {
-            player.Status.color.color = Color.green;
+            player.Status.color.color = new Color(147, 0, 255);
         }
     }
 }
