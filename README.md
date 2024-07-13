@@ -15,3 +15,5 @@
 - Tìm cặp thẻ
 - PvP giữa 2 người chơi
 - Các thẻ đặc biệt với nhiều tính năng khác nhau
+- Tấn công đối thủ bằng cách tìm cặp thẻ
+- Giữ HP của mình ở mức cao nhất để chiến thắng
