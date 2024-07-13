@@ -2285,6 +2285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCheckingMatch: 0
+  totalCards: 28
 --- !u!4 &1126506381
 Transform:
   m_ObjectHideFlags: 0
@@ -2293,7 +2294,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126506379}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3176,14 +3177,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582984150}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 612776778}
   - {fileID: 1086269669}
-  m_Father: {fileID: 2079026994}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1582984152
 MonoBehaviour:
@@ -3846,7 +3847,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1126506381}
-  - {fileID: 1582984151}
   - {fileID: 2072330318}
   - {fileID: 1749398187}
   m_Father: {fileID: 0}
@@ -3952,3 +3952,4 @@ SceneRoots:
   - {fileID: 2079026994}
   - {fileID: 485025874}
   - {fileID: 574478862}
+  - {fileID: 1582984151}

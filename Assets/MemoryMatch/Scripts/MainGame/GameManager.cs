@@ -52,8 +52,8 @@ public class GameManager : MonoBehaviour
 
             // Apply the card type effect
             firstRevealed.ActivateEffect();
-            //Increase counting variable
-            Number_Of_Matched_Pair++;
+
+            matchedCards += 2;
         }
         // If no match, unreveal the cards after a brief pause
         else
@@ -71,15 +71,16 @@ public class GameManager : MonoBehaviour
         secondRevealed = null;
         isCheckingMatch = false;
     }
-    private void Match_Ended()
-    {
-        if (Number_Of_Matched_Pair == 14)
-        {
-            SceneManager.LoadScene("EndScene");
-        }
-    }
+
+    [SerializeField] int totalCards;
+    int matchedCards = 0;
+
     private void Update()
     {
-        Match_Ended();
+        // end game
+        if (matchedCards == totalCards)
+        {
+            SceneManager.LoadScene(2);
+        }
     }
 }

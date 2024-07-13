@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneMaganement : MonoBehaviour
 {
+    public static SceneMaganement instance;
     [SerializeField] GameObject settingMenu;
     [SerializeField] GameObject gamerulePanel;
 
@@ -42,9 +43,10 @@ public class SceneMaganement : MonoBehaviour
     public void LoadHome() // start scene
     {
         SceneManager.LoadScene(0);
-    }
-    public void LoadScene(string nameScene)
+    }   
+
+    public void LoadEndScene()
     {
-        SceneManager.LoadScene(nameScene);
+        SceneManager.LoadScene(2);
     }
 }
