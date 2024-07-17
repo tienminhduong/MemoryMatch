@@ -21,7 +21,7 @@ public class GameBoardManager : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] Card cardPrefab;
+    [SerializeField] List<Card> cardPrefabs;
     public CardConfigs cardConfigs;
     [SerializeField] int rows = 7;
     [SerializeField] int cols = 4;
@@ -33,6 +33,8 @@ public class GameBoardManager : MonoBehaviour
     private List<Card> cards;
     public int NumberCardCategory => cardConfigs.Stat.Count;
     public bool IsDelayed => GameManager.instance.isCheckingMatch || revealCount > 0;
+
+    public List<Card> CardPrefabs => cardPrefabs;
 
 
     void Start()
@@ -70,10 +72,14 @@ public class GameBoardManager : MonoBehaviour
 
             if (idValue < 9) checkExisted[idValue] = true;
 
-            Card card = Instantiate(cardPrefab);
-            card.SetupCard(idValue); cards.Add(card);
-            card = Instantiate(cardPrefab);
-            card.SetupCard(idValue); cards.Add(card);
+            //Card card = Instantiate(cardPrefab);
+            Card card = Instantiate(cardPrefabs[idValue]);
+            cards.Add(card);
+            card = Instantiate(cardPrefabs[idValue]);
+            cards.Add(card);
+
+            //card.SetupCard(idValue); cards.Add(card);
+            //card.SetupCard(idValue); cards.Add(card);
         }
     }
 

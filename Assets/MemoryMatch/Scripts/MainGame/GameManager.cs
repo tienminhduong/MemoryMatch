@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
 
             // Apply the card type effect
-            firstRevealed.ActivateEffect();
+            firstRevealed.ActivateEffect(PlayerManager.Instance.GetPlayer(0), PlayerManager.Instance.GetPlayer(1));
 
             matchedCards += 2;
             EndTurn(false);

@@ -48,6 +48,7 @@ public class PlayerManager : MonoBehaviour
     public Player GetPlayer(int index) {
         return players[(turnPlayerIndex + index) % 2];
     }
+
     public void EndTurn(bool switchPlayer) {
         GetPlayer(0).UpdateEndTurn();
 

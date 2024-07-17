@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
     }
 
     public void ModifyHP(int amount) {
-        currentHP -= amount;
+        currentHP += amount;
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
     }
 }
