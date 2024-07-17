@@ -28,8 +28,9 @@ public class Card : MonoBehaviour
         cardBack.SetActive(true);
     }
 
-    private void OnMouseDown()
+    public void OnMouseDown()
     {
+<<<<<<< Updated upstream
         if (!cardBack.activeSelf || GameManager.instance.isCheckingMatch)
             return;
 
@@ -39,13 +40,114 @@ public class Card : MonoBehaviour
     }
 
     // Unreveal the card
+=======
+        if (GameBoardManager.Instance != null)
+        {
+            if (!cardBack.activeSelf || GameBoardManager.Instance.IsDelayed)
+                return;
+            // Reveal the card
+            FlipFront();
+            GameManager.instance.CardRevealed(this);
+        }
+        else if (BotGameBoardManager.Instance != null)
+        {
+            if (!cardBack.activeSelf || BotGameBoardManager.Instance.IsDelayed)
+                return;
+            // Reveal the card
+            FlipFront();
+            BotGameManager.Instance.CardRevealed(this);
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    public void FlipBack()
+    {
+        animator.SetTrigger("unreveal");
+    }
+    public void FlipFront()
+    {
+        animator.SetTrigger("reveal");
+    }
+    public void PlayMatchedAnimation()
+    {
+        animator.SetTrigger("matched");
+    }
+
+    // Animation trigger, don't use this
+>>>>>>> Stashed changes
     public void Unreveal()
     {
         cardBack.SetActive(true);
     }
 
+<<<<<<< Updated upstream
     public void ActivateEffect() {
 
+=======
+    // Animation trigger, don't use this
+    public void Reveal()
+    {
+        cardBack.SetActive(false);
+    }
+
+    public void ActivateEffect()
+    {
+        CardConfig resolveCard = Stat;
+
+        if (resolveCard.Category == CardCategory.Random)
+        {
+            resolveCard = configs.Stat[Random.Range(0, 7)];
+
+            Debug.Log("Random rolls into " + resolveCard.Category.ToString());
+        }
+
+        Player target = null;
+        if (PlayerManager.Instance != null)
+        {
+            target = PlayerManager.Instance.GetPlayer((int)resolveCard.Target);
+        }
+        else if (BotPlayerManager.Instance != null)
+        {
+            target = BotPlayerManager.Instance.GetPlayer((int)resolveCard.Target);
+        }
+        else
+        {
+            return;
+        }
+
+        // Inflict damage or heal
+        target.ModifyHP(resolveCard.Damage);
+
+        switch (resolveCard.Category)
+        {
+            case CardCategory.Bomb:
+                if (Random.Range(0, 100) < 50)
+                    target.SetStatusEffect(StatusEffect.Burned);
+                break;
+            case CardCategory.Paralyze:
+                target.SetStatusEffect(StatusEffect.Paralyzed);
+                break;
+            case CardCategory.Poison:
+                target.SetStatusEffect(StatusEffect.Poisoned);
+                break;
+            case CardCategory.Lens:
+                if (GameBoardManager.Instance != null)
+                    GameBoardManager.Instance.RevealAllCardsInSeconds(2);
+                else if (BotGameBoardManager.Instance != null)
+                {
+                    BotGameBoardManager.Instance.RevealAllCardsInSeconds(2);
+                }
+                break;
+            case CardCategory.Potion:
+                target.SetStatusEffect(StatusEffect.None);
+                break;
+            default:
+                break;
+        }
+>>>>>>> Stashed changes
     }
 }
 

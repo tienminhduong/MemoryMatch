@@ -4,16 +4,27 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+<<<<<<< Updated upstream
     [SerializeField] int maxHP;
     [SerializeField] int currentHP;
 
     StatusEffect appliedEffect;
     int numberTurnsEffectRemain;
+=======
+    [SerializeField] protected int index;
+    [SerializeField] protected int maxHP;
+    [SerializeField] protected int currentHP;
+    [SerializeField] protected SpriteRenderer spriteRenderer;
+    [SerializeField] protected Slider playerHealthBar;
+    [SerializeField] protected PlayerStatusUI status;
+    [SerializeField] protected StatusEffect appliedEffect;
+    protected int numberTurnsEffectRemain;
+>>>>>>> Stashed changes
 
     public StatusEffect AppliedEffect => appliedEffect;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         currentHP = maxHP;
         appliedEffect = StatusEffect.None;
@@ -23,6 +34,21 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+<<<<<<< Updated upstream
+=======
+        if (PlayerManager.Instance != null)
+        {
+            spriteRenderer.enabled = PlayerManager.Instance.CurrentTurnPlayerIndex == index;
+        }
+        else if (BotPlayerManager.Instance != null)
+        {
+            spriteRenderer.enabled = BotPlayerManager.Instance.CurrentTurnPlayerIndex == index;
+        }
+    }
+
+    public void UpdateStatsUI()
+    {
+>>>>>>> Stashed changes
         
     }
 
