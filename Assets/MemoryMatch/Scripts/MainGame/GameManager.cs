@@ -9,8 +9,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public int shuffleAfter = 0;
 
-    public BotActions botPrefab;
     BotActions bot;
+    public BotActions botPrefab;
+    public BotActions Bot => bot;
 
     private void Awake() {
         // Singleton pattern to ensure only one instance of GameManager exists
@@ -91,23 +92,18 @@ public class GameManager : MonoBehaviour
             if (shuffleAfter == 0)
                 GameBoardManager.Instance.Shuffle();
         }
+
+        if (PlayerManager.Instance.CurrentTurnPlayerIndex == 1)
+            StartCoroutine(bot.SelectCards());
+        //bot.isSelecting = PlayerManager.Instance.CurrentTurnPlayerIndex == 1;
     }
 
     [SerializeField] int totalCards;
     int matchedCards = 0;
 
-    void CheckBot() {
-        // If there are no bots, or it's the player's turn, exit the method
-        if (bot == null || PlayerManager.Instance.CurrentTurnPlayerIndex == 0 || GameBoardManager.Instance.IsRevealingAll)
-            return;
-
-        bot.SelectCards();
-    }
-
     private void Update()
     {
         // Bot play
-        CheckBot();
 
         // End game
         if (matchedCards == totalCards)

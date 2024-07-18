@@ -73,14 +73,10 @@ public class GameBoardManager : MonoBehaviour
 
             if (idValue < 9) checkExisted[idValue] = true;
 
-            //Card card = Instantiate(cardPrefab);
             Card card = Instantiate(cardPrefabs[idValue]);
             cards.Add(card);
             card = Instantiate(cardPrefabs[idValue]);
             cards.Add(card);
-
-            //card.SetupCard(idValue); cards.Add(card);
-            //card.SetupCard(idValue); cards.Add(card);
         }
     }
 
@@ -101,14 +97,8 @@ public class GameBoardManager : MonoBehaviour
 
     float revealCount = 0;
     bool[] isFlipped;
-    public bool IsRevealingAll {
-        get {
-            foreach (Card card in cards)
-                if (!card.IsRevealing)
-                    return false;
-            return true;
-        }
-    }
+
+    public float RevealCount => revealCount;
 
     // Reveal all cards in x seconds
     public void RevealAllCardsInSeconds(float second) {

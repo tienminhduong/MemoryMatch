@@ -23,7 +23,13 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ResetPlayer();
+    }
+
+    public void ResetPlayer() {
         turnPlayerIndex = 0;
+        players[0].ResetStat();
+        players[1].ResetStat();
     }
 
     // Update is called once per frame
