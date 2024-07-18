@@ -11,6 +11,8 @@ public class BotActions : MonoBehaviour
 
     private void Update() {
         cardList = GameBoardManager.Instance.Cards;
+        if (cardList != null)
+            Debug.Log(cardList[0].transform.rotation.eulerAngles.y);
     }
 
     public void SelectCards() {

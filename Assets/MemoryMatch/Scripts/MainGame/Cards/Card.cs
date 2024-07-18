@@ -11,7 +11,8 @@ public class Card : MonoBehaviour
     Animator animator;
 
     public int CardValue => cardValue;
-    public bool IsRevealing => !cardBack.activeSelf;
+    //public bool IsRevealing => !cardBack.activeSelf;
+    public bool IsRevealing => transform.rotation.eulerAngles.y != 180;
 
     private void Awake() {
         animator = GetComponent<Animator>();

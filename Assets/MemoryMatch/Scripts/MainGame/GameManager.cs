@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
 
     void CheckBot() {
         // If there are no bots, or it's the player's turn, exit the method
-        if (bot == null || PlayerManager.Instance.CurrentTurnPlayerIndex == 0)
+        if (bot == null || PlayerManager.Instance.CurrentTurnPlayerIndex == 0 || GameBoardManager.Instance.IsRevealingAll)
             return;
 
         bot.SelectCards();

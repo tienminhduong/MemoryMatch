@@ -101,6 +101,14 @@ public class GameBoardManager : MonoBehaviour
 
     float revealCount = 0;
     bool[] isFlipped;
+    public bool IsRevealingAll {
+        get {
+            foreach (Card card in cards)
+                if (!card.IsRevealing)
+                    return false;
+            return true;
+        }
+    }
 
     // Reveal all cards in x seconds
     public void RevealAllCardsInSeconds(float second) {
