@@ -11,8 +11,7 @@ public class Card : MonoBehaviour
     Animator animator;
 
     public int CardValue => cardValue;
-    //public bool IsRevealing => !cardBack.activeSelf;
-    public bool IsRevealing => transform.rotation.eulerAngles.y != 180;
+    public bool IsRevealing => !cardBack.activeSelf;
 
     private void Awake() {
         animator = GetComponent<Animator>();
@@ -20,15 +19,12 @@ public class Card : MonoBehaviour
     }
 
 
-    // Set up the card with id/cardValue
-    public void SetupCard(int id)
-    {
-        cardValue = id;
-        cardBack.SetActive(true);
-    }
-
     private void OnMouseDown()
     {
+        // If it's bot turn, return
+        if (GameManager.instance.Bot != null && PlayerManager.Instance.CurrentTurnPlayerIndex == 1)
+            return;
+
         SelectCard();
     }
 
@@ -61,8 +57,5 @@ public class Card : MonoBehaviour
         cardBack.SetActive(false);
     }
 
-    public virtual void ActivateEffect(Player turnPlayer, Player nonturnPlayer) {
-        // if gamemode == casual
-        // return;
-    }
+    public virtual void ActivateEffect(Player turnPlayer, Player nonturnPlayer) { }
 }
