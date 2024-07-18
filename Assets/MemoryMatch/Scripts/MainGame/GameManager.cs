@@ -112,6 +112,7 @@ public class GameManager : MonoBehaviour
         // End game
         if (matchedCards == totalCards)
         {
+            PlayerManager.Instance.SaveWinnerData();
             SceneManager.LoadScene(2);
         }
     }

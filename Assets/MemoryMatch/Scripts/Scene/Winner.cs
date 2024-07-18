@@ -9,10 +9,11 @@ public class Winner : MonoBehaviour
     int tmp;
     void Start()
     {
-        if (!PlayerManager.Instance) return;
-        if (PlayerManager.Instance.GetWinner() == 1)
+        int winner = PlayerPrefs.GetInt("WinnerId");
+        Debug.Log("winner id : " + winner);
+        if (winner == 1)
             winnerText.text = "Player 1 won !!!";
-        else if (PlayerManager.Instance.GetWinner() == 2)
+        else if (winner == 2)
             winnerText.text = "Player 2 won !!!";
         else winnerText.text = "Drawww !!!";
     }
