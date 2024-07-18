@@ -31,6 +31,7 @@ public class GameBoardManager : MonoBehaviour
     Vector3 topLeftCornerPos;
 
     private List<Card> cards;
+    public List<Card> Cards => cards;
     public int NumberCardCategory => cardConfigs.Stat.Count;
     public bool IsDelayed => GameManager.instance.isCheckingMatch || revealCount > 0;
 

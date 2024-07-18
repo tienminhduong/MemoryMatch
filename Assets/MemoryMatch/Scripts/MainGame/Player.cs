@@ -43,9 +43,9 @@ public class Player : MonoBehaviour
             return;
 
         if (appliedEffect == StatusEffect.Poisoned)
-            ModifyHP(maxHP / 16);
+            ModifyHP(-maxHP / 16);
         if (appliedEffect == StatusEffect.Burned)
-            ModifyHP(maxHP / 8);
+            ModifyHP(-maxHP / 8);
         numberTurnsEffectRemain--;
         if (numberTurnsEffectRemain == 0)
             appliedEffect = StatusEffect.None;

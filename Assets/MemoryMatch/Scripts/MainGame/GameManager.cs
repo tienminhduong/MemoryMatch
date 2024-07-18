@@ -9,12 +9,18 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public int shuffleAfter = 0;
 
+    public BotActions botPrefab;
+    BotActions bot;
+
     private void Awake() {
         // Singleton pattern to ensure only one instance of GameManager exists
         if (instance == null)
             instance = this;
         else
             Destroy(gameObject);
+    }
+    private void Start() {
+        bot = Instantiate(botPrefab);
     }
 
     // Return the camera's height
@@ -90,9 +96,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] int totalCards;
     int matchedCards = 0;
 
+    void CheckBot() {
+        // If there are no bots, or it's the player's turn, exit the method
+        if (bot == null || PlayerManager.Instance.CurrentTurnPlayerIndex == 0)
+            return;
+
+        bot.SelectCards();
+    }
+
     private void Update()
     {
-        // end game
+        // Bot play
+        CheckBot();
+
+        // End game
         if (matchedCards == totalCards)
         {
             SceneManager.LoadScene(2);

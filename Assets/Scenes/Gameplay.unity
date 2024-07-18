@@ -2298,6 +2298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shuffleAfter: 0
+  botPrefab: {fileID: 3098539137923084691, guid: 40e96dc5ff6de0f4eabe640a24280816, type: 3}
   isCheckingMatch: 0
   totalCards: 28
 --- !u!4 &1126506381

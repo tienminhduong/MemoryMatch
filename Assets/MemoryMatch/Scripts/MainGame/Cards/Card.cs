@@ -28,6 +28,10 @@ public class Card : MonoBehaviour
 
     private void OnMouseDown()
     {
+        SelectCard();
+    }
+
+    public void SelectCard() {
         if (!cardBack.activeSelf || GameBoardManager.Instance.IsDelayed)
             return;
 
