@@ -31,13 +31,6 @@ public class UIManager : MonoBehaviour
 
     public void UpdateUI(Player player)
     {
-        //player.PlayerHealthBar.value = player.CurrentHP;
-        if (player.Status == null)
-        {
-            Debug.Log("player is NULLL");
-            return;
-        }
-        Debug.Log("Player status: " + player.Status.ToString() + ", HP: " + player.CurrentHP);
         player.Status.slider.value = player.CurrentHP;
         player.Status.text.text = player.AppliedEffect.ToString();
 

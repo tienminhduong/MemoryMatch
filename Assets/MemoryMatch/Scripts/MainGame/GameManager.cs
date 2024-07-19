@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public int shuffleAfter = 0;
 
     BotActions bot;
-    public BotActions botPrefab;
+    //public BotActions botPrefab;
     public BotActions Bot => bot;
 
     private void Awake() {
@@ -21,7 +21,20 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
     private void Start() {
-        bot = Instantiate(botPrefab);
+        if (BotActions.Instance.isActiveAndEnabled)
+            bot = BotActions.Instance;
+        else
+            bot = null;
+
+        //bot = Instantiate(botPrefab);
+        //bot = null;
+        //if (SceneMaganement.instance.HaveBot)
+            //bot = SceneMaganement.instance.Bot;
+        //else
+            //bot = null;
+    }
+    public void LoadBot() {
+        //bot = Instantiate(botPrefab);
     }
 
     // Return the camera's height
@@ -93,9 +106,8 @@ public class GameManager : MonoBehaviour
                 GameBoardManager.Instance.Shuffle();
         }
 
-        if (PlayerManager.Instance.CurrentTurnPlayerIndex == 1)
+        if (bot && PlayerManager.Instance.CurrentTurnPlayerIndex == 1)
             StartCoroutine(bot.SelectCards());
-        //bot.isSelecting = PlayerManager.Instance.CurrentTurnPlayerIndex == 1;
     }
 
     [SerializeField] int totalCards;
@@ -103,8 +115,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        // Bot play
-
         // End game
         if (matchedCards == totalCards)
         {

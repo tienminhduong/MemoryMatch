@@ -9,6 +9,14 @@ public class SceneMaganement : MonoBehaviour
     public static SceneMaganement instance;
     [SerializeField] GameObject settingMenu;
     [SerializeField] GameObject gamerulePanel;
+    [SerializeField] GameObject botPrefab;
+
+    private void Awake() {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
 
     private void Start()
     {
@@ -38,8 +46,15 @@ public class SceneMaganement : MonoBehaviour
 
     public void LoadMainScene()  // PvP mode
     {
-        PlayerManager.Instance.ResetPlayer();
         SceneManager.LoadScene(1);
+    }
+    public void LoadMainSceneWithBot() {
+        LoadMainScene();
+        BotActions.Instance.gameObject.SetActive(true);
+    }
+    public void LoadMainSceneWithoutBot() {
+        LoadMainScene();
+        BotActions.Instance.gameObject.SetActive(false);
     }
     public void LoadHome() // start scene
     {

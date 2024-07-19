@@ -1,22 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BotActions : MonoBehaviour
 {
+    private static BotActions instance;
+    public static BotActions Instance => instance;
+    private void Awake() {
+        // Singleton pattern to ensure only one instance of GameManager exists
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
+    }
+
     Card previousSelect = null;
     List<Card> cardList;
 
     [SerializeField] float iq; // the chance of the bot guessing correctly
     public bool isSelecting = false;
 
+
     private void Update() {
-        cardList = GameBoardManager.Instance.Cards;
-<<<<<<< HEAD
-        //if (cardList != null)
-        //    Debug.Log(cardList[0].transform.rotation.eulerAngles.y);
-=======
->>>>>>> e311ccd5d5a41a0cd380f245c3344eede5adc81f
+        cardList = GameBoardManager.Instance != null ? GameBoardManager.Instance.Cards : null;
     }
 
     public IEnumerator SelectCards() {
