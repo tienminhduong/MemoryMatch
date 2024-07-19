@@ -379,7 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _backgroundMusic: {fileID: 1130602619}
-  _bgMusic: {fileID: 8300000, guid: 7b75ee51fc6fea54190d2db50fb8d2a6, type: 3}
+  _bgMusic: {fileID: 8300000, guid: 41765a6ec21fafa49acb2edb484540ff, type: 3}
   _FX: {fileID: 1896878346}
   _clips:
   - {fileID: 8300000, guid: c11369195bf91e34db36ac76dff87f77, type: 3}
@@ -388,6 +388,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 29a0f545dfce221499f6a75d6212d634, type: 3}
   - {fileID: 8300000, guid: 509ddc3106ff3044b92655c5032b546b, type: 3}
   - {fileID: 8300000, guid: 019f027914a3edc499b7a0773bc7879e, type: 3}
+  - {fileID: 8300000, guid: a838550e96cadb949a05522f9878ba69, type: 3}
+  - {fileID: 8300000, guid: 3f7ed6511e5e3d143a9049c8121f5889, type: 3}
 --- !u!4 &134906621
 Transform:
   m_ObjectHideFlags: 0
@@ -2387,7 +2389,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &1130602619
 AudioSource:
   m_ObjectHideFlags: 0

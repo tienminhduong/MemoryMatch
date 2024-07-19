@@ -82,6 +82,7 @@ public class GameBoardManager : MonoBehaviour
 
     // Shuffle the card values list
     public void Shuffle() {
+        SoundManager.Instance.PlayAudioClip(6);
         List<Card> temp = cards;
         cards = new List<Card>();
         while (temp.Count > 0) {

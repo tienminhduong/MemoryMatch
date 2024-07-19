@@ -10,7 +10,7 @@ public class SceneMaganement : MonoBehaviour
     [SerializeField] GameObject settingMenu;
     [SerializeField] GameObject gamerulePanel;
     [SerializeField] GameObject botPrefab;
-
+    [SerializeField] private bool isPaused = false;
     private void Awake() {
         if (instance == null)
             instance = this;
@@ -28,11 +28,15 @@ public class SceneMaganement : MonoBehaviour
 
     public void OpenSettingMenu()
     {
+        isPaused = true;
         settingMenu.SetActive(true);
     }
 
     public void CloseSettingMenu()
-    { settingMenu.SetActive(false); }
+    {
+        isPaused = false;
+        settingMenu.SetActive(false); 
+    }
 
 
     public void OpenGamerulePanel()
@@ -59,10 +63,14 @@ public class SceneMaganement : MonoBehaviour
     public void LoadHome() // start scene
     {
         SceneManager.LoadScene(0);
-    }   
+    }
 
     public void LoadEndScene()
     {
         SceneManager.LoadScene(2);
+    }
+    public bool get_isPaused()
+    {
+        return isPaused;
     }
 }
