@@ -7,9 +7,9 @@ public class RandomCard : Card
     public override void ActivateEffect(Player turnPlayer, Player nonturnPlayer) {
         base.ActivateEffect(turnPlayer, nonturnPlayer);
 
-        int id = Random.Range(0, GameBoardManager.Instance.CardPrefabs.Count);
-        while (id == this.CardValue)
-            id = Random.Range(0, GameBoardManager.Instance.CardPrefabs.Count);
+        int id = Random.Range(0, (int)CardCategory.Random);
+        while (id == CardValue)
+            id = Random.Range(0, (int)CardCategory.Random);
 
         Debug.Log("Activate " + ((CardCategory)id).ToString() + " effect!");
 

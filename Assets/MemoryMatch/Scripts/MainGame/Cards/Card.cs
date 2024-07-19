@@ -65,3 +65,7 @@ public class Card : MonoBehaviour
 
     public virtual void ActivateEffect(Player turnPlayer, Player nonturnPlayer) { }
 }
+public enum CardCategory
+{
+    Heal, Hammer, Sword, Bomb, Paralyze, Poison, Lens, Potion, Random, Red, Blue, Green, Yellow
+}

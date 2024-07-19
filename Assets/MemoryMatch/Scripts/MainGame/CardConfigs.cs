@@ -26,10 +26,7 @@ public class CardConfig
 }
 
 // Enum to represent different types of cards
-public enum CardCategory
-{
-    Heal, Hammer, Sword, Bomb, Paralyze, Poison, Lens, Potion, Random, Red, Blue, Green, Yellow
-}
+
 
 public enum CardTarget
 {

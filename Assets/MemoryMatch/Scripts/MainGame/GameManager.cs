@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
     private void Start() {
-        if (BotActions.Instance.isActiveAndEnabled)
+        if (BotActions.Instance && BotActions.Instance.isActiveAndEnabled)
             bot = BotActions.Instance;
         else
             bot = null;
