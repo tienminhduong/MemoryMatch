@@ -21,11 +21,14 @@ public class Card : MonoBehaviour
 
     private void OnMouseDown()
     {
-        // If it's bot turn, return
-        if (GameManager.instance.Bot != null && PlayerManager.Instance.CurrentTurnPlayerIndex == 1)
-            return;
+        if (SceneMaganement.instance.get_isPaused() == false)
+        {
+            // If it's bot turn, return
+            if (GameManager.instance.Bot != null && PlayerManager.Instance.CurrentTurnPlayerIndex == 1)
+                return;
 
-        SelectCard();
+            SelectCard();
+        }
     }
 
     public void SelectCard() {
@@ -40,10 +43,13 @@ public class Card : MonoBehaviour
     public void FlipBack() {
         animator.SetTrigger("unreveal");
     }
-    public void FlipFront() {
+    public void FlipFront() 
+    {
+        SoundManager.Instance.PlayAudioClip(7);
         animator.SetTrigger("reveal");
     }
-    public void PlayMatchedAnimation() {
+    public void PlayMatchedAnimation()
+    {
         animator.SetTrigger("matched");
     }
 
@@ -58,4 +64,8 @@ public class Card : MonoBehaviour
     }
 
     public virtual void ActivateEffect(Player turnPlayer, Player nonturnPlayer) { }
+}
+public enum CardCategory
+{
+    Heal, Hammer, Sword, Bomb, Paralyze, Poison, Lens, Potion, Random, Red, Blue, Green, Yellow
 }

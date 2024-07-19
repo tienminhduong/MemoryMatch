@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
     private void Start() {
-        if (BotActions.Instance.isActiveAndEnabled)
+        if (BotActions.Instance && BotActions.Instance.isActiveAndEnabled)
             bot = BotActions.Instance;
         else
             bot = null;
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
             firstRevealed.PlayMatchedAnimation();
             secondRevealed.PlayMatchedAnimation();
             yield return new WaitForSeconds(1.0f);
-
+            SoundManager.Instance.PlayAudioClip(0); // matched sound
             // Apply the card type effect
             firstRevealed.ActivateEffect(PlayerManager.Instance.GetPlayer(0), PlayerManager.Instance.GetPlayer(1));
 
