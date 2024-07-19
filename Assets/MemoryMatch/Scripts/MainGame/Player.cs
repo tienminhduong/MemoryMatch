@@ -22,6 +22,10 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ResetStat();
+    }
+
+    public void ResetStat() {
         currentHP = maxHP;
         appliedEffect = StatusEffect.None;
         numberTurnsEffectRemain = 0;
@@ -43,9 +47,9 @@ public class Player : MonoBehaviour
             return;
 
         if (appliedEffect == StatusEffect.Poisoned)
-            ModifyHP(maxHP / 16);
+            ModifyHP(-maxHP / 16);
         if (appliedEffect == StatusEffect.Burned)
-            ModifyHP(maxHP / 8);
+            ModifyHP(-maxHP / 8);
         numberTurnsEffectRemain--;
         if (numberTurnsEffectRemain == 0)
             appliedEffect = StatusEffect.None;
@@ -60,7 +64,7 @@ public class Player : MonoBehaviour
     }
 
     public void ModifyHP(int amount) {
-        currentHP -= amount;
+        currentHP += amount;
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
     }
 }

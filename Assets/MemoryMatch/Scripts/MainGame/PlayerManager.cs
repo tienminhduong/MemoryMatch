@@ -8,8 +8,6 @@ public class PlayerManager : MonoBehaviour
     static PlayerManager instance;
     public static PlayerManager Instance => instance;
     private void Awake() {
-
-        DontDestroyOnLoad(gameObject);
         // Singleton pattern to ensure only one instance of GameManager exists
         if (instance == null)
             instance = this;
@@ -25,29 +23,30 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ResetPlayer();
+    }
+
+    public void ResetPlayer() {
         turnPlayerIndex = 0;
+        players[0].ResetStat();
+        players[1].ResetStat();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (players[0].CurrentHP < 0)
+        if (players[0].CurrentHP < 0 || players[1].CurrentHP < 0)
         {
-            winner = 2;
+            SaveWinnerData();
             SceneMaganement.instance.LoadEndScene();
         }
-        if (players[1].CurrentHP < 0)
-        {
-            winner = 1;
-            SceneMaganement.instance.LoadEndScene();
-        }
-
     }
 
     // 0 return current turn player, 1 return non-turn player
     public Player GetPlayer(int index) {
         return players[(turnPlayerIndex + index) % 2];
     }
+
     public void EndTurn(bool switchPlayer) {
         GetPlayer(0).UpdateEndTurn();
 
@@ -59,15 +58,22 @@ public class PlayerManager : MonoBehaviour
         for (int i = 0; i < 2; i++) UIManager.Instance.UpdateUI(players[i]);
     }
 
-    int winner = 0;
-    public int GetWinner()
+    public void SaveWinnerData()
     {
-        // if one of the 2 players died
-        if (winner != 0) return winner;
-
-        // check HP at the end
-        if (players[0].CurrentHP > players[1].CurrentHP) return 1;
-        else if (players[0].CurrentHP < players[1].CurrentHP) return 2;
-        else return 0;
+        if (players[0].CurrentHP > players[1].CurrentHP)
+        {
+            PlayerPrefs.SetInt("WinnerId", 1);
+            Debug.Log("save winner data : 1");
+        }
+        else if (players[0].CurrentHP < players[1].CurrentHP)
+        {
+            PlayerPrefs.SetInt("WinnerId", 2);
+            Debug.Log("save winner data : 2");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("WinnerId", 0);
+            Debug.Log("save winner data : 0");
+        }
     }
 }

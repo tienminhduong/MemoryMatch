@@ -38,6 +38,7 @@ public class SceneMaganement : MonoBehaviour
 
     public void LoadMainScene()  // PvP mode
     {
+        PlayerManager.Instance.ResetPlayer();
         SceneManager.LoadScene(1);
     }
     public void LoadHome() // start scene

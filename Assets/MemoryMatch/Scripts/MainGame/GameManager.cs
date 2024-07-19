@@ -9,12 +9,19 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public int shuffleAfter = 0;
 
+    BotActions bot;
+    public BotActions botPrefab;
+    public BotActions Bot => bot;
+
     private void Awake() {
         // Singleton pattern to ensure only one instance of GameManager exists
         if (instance == null)
             instance = this;
         else
             Destroy(gameObject);
+    }
+    private void Start() {
+        bot = Instantiate(botPrefab);
     }
 
     // Return the camera's height
@@ -53,7 +60,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
 
             // Apply the card type effect
-            firstRevealed.ActivateEffect();
+            firstRevealed.ActivateEffect(PlayerManager.Instance.GetPlayer(0), PlayerManager.Instance.GetPlayer(1));
 
             matchedCards += 2;
             EndTurn(false);
@@ -85,6 +92,10 @@ public class GameManager : MonoBehaviour
             if (shuffleAfter == 0)
                 GameBoardManager.Instance.Shuffle();
         }
+
+        if (PlayerManager.Instance.CurrentTurnPlayerIndex == 1)
+            StartCoroutine(bot.SelectCards());
+        //bot.isSelecting = PlayerManager.Instance.CurrentTurnPlayerIndex == 1;
     }
 
     [SerializeField] int totalCards;
@@ -92,9 +103,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        // end game
+        // Bot play
+
+        // End game
         if (matchedCards == totalCards)
         {
+            PlayerManager.Instance.SaveWinnerData();
             SceneManager.LoadScene(2);
         }
     }
