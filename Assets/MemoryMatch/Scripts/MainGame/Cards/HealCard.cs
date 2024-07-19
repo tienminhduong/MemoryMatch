@@ -9,5 +9,6 @@ public class HealCard : Card
     public override void ActivateEffect(Player turnPlayer, Player nonturnPlayer) {
         base.ActivateEffect(turnPlayer, nonturnPlayer);
         turnPlayer.ModifyHP(healAmount);
+        SoundManager.Instance.PlayAudioClip(3);
     }
 }

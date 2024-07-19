@@ -10,5 +10,6 @@ public class AttackCard : Card
     public override void ActivateEffect(Player turnPlayer, Player nonturnPlayer) {
         base.ActivateEffect(turnPlayer, nonturnPlayer);
         nonturnPlayer.ModifyHP(-damage);
+        SoundManager.Instance.PlayAudioClip(1);
     }
 }

@@ -43,7 +43,8 @@ public class Card : MonoBehaviour
     public void FlipFront() {
         animator.SetTrigger("reveal");
     }
-    public void PlayMatchedAnimation() {
+    public void PlayMatchedAnimation()
+    {
         animator.SetTrigger("matched");
     }
 
