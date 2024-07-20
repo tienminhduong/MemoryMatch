@@ -31,10 +31,17 @@ public class AnimationManager : MonoBehaviour
 
     public void PlayAnimation(CardCategory category) {
         if (PlayerManager.Instance.CurrentTurnPlayerIndex == 0) {
-            transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+            if (category != CardCategory.Heal && category != CardCategory.Potion)
+                transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+            else
+                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
-        else
-            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        else {
+            if (category != CardCategory.Heal && category != CardCategory.Potion)
+                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            else
+                transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+        }
         animations[(int)category].SetActive(true);
     }
 }

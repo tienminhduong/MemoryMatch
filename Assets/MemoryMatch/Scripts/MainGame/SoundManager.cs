@@ -23,6 +23,8 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayAudioClip(int index)
     {
+        if (_FX.isPlaying && index == 6)
+            return;
         _FX.clip = _clips[index];
         _FX.Play();
     }
